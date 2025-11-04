@@ -63,6 +63,7 @@ done
 genaiscript run bpel-transformer --vars input=test/sample-order.bpel
 
 # Verify completeness
+# (Example placeholder: implement your own validation script in package.json)
 npm run validate:prd-completeness
 
 # Check for gaps
