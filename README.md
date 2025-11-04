@@ -38,36 +38,25 @@ This agent serves as a senior systems analyst and product architect with deep ex
 ## Usage
 
 ### Basic Transformation
-```bash
-# Transform a single BPEL file
-genaiscript run bpel-transformer --vars input=order-process.bpel
-
-# Transform with WSDL context
-genaiscript run bpel-transformer --vars input=process.bpel wsdl=services.wsdl
-
-# Generate JSON summary
-genaiscript run bpel-transformer --vars input=process.bpel format=json > summary.json
-```
+The agent analyzes BPEL process files and generates comprehensive PRDs. Simply provide:
+- **Primary Input**: One or more Oracle BPEL XML process files (OASIS WS-BPEL 2.0)
+- **Optional Context**: Referenced WSDLs and XSDs for complete type resolution
+- **Format**: BPEL XML pasted or referenced in the input
 
 ### Batch Processing
-```bash
-# Transform multiple processes
-for file in bpel/*.bpel; do
-  genaiscript run bpel-transformer --vars input="$file" output="prds/$(basename $file .bpel).md"
-done
-```
+The agent can process multiple BPEL files in sequence to generate:
+- Individual PRD documents for each process
+- Machine-readable JSON summaries
+- Cross-process integration documentation
 
 ### Validation
+After generating PRDs, validate completeness by:
 ```bash
-# Test on sample BPEL
-genaiscript run bpel-transformer --vars input=test/sample-order.bpel
-
-# Verify completeness
-# (Example placeholder: implement your own validation script in package.json)
-npm run validate:prd-completeness
-
-# Check for gaps
+# Check for gaps in generated PRDs
 grep -i "gap\|assumption\|unclear" prds/*.md
+
+# Review JSON summaries for completeness
+cat summaries/*.json | jq '.gaps[], .assumptions[]'
 ```
 
 ## Project Structure

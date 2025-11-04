@@ -20,34 +20,34 @@ You are a senior systems analyst and product architect with deep expertise in Or
 
 ## Commands
 
-```bash
-# Transform BPEL to PRD
-genaiscript run bpel-transformer --vars input=order-process.bpel
+The agent analyzes BPEL XML files and generates comprehensive PRDs through direct interaction. Provide:
+- **Primary Input**: BPEL XML content between `<<<BPEL>>>` and `<<<END>>>` markers
+- **Optional Context**: WSDL and XSD references for complete type resolution
+- **Output Selection**: Request Markdown PRD (default) or JSON summary format
 
-# Transform with WSDL context
-genaiscript run bpel-transformer --vars bpel=process.bpel wsdl=services.wsdl
+Example interaction:
+```
+Please transform this BPEL process:
 
-# Batch transform multiple processes
-for file in bpel/*.bpel; do
-  genaiscript run bpel-transformer --vars input="$file" output="prds/$(basename $file .bpel).md"
-done
+<<<BPEL>>>
+<process name="OrderProcess" targetNamespace="http://example.com/orders">
+  <!-- BPEL content here -->
+</process>
+<<<END>>>
 
-# Generate JSON summary
-genaiscript run bpel-transformer --vars input=process.bpel format=json > summary.json
+Also reference these WSDLs: services.wsdl
 ```
 
 ## Testing
 
 ### Transformation Validation
+Validate generated PRDs by:
 ```bash
-# Test on sample BPEL
-genaiscript run bpel-transformer --vars input=test/sample-order.bpel
-
-# Verify completeness
-npm run validate:prd-completeness
-
-# Check for gaps
+# Check for gaps in generated PRDs
 grep -i "gap\|assumption\|unclear" prds/*.md
+
+# Review JSON summaries
+cat summaries/*.json | jq '.gaps[], .assumptions[]'
 ```
 
 ### Quality Metrics
