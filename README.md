@@ -22,8 +22,8 @@ This agent serves as a senior systems analyst and product architect with deep ex
 - **Human Tasks**: Documentation of Oracle BPM human task extensions and approval workflows
 
 ### Output Generation
-- **Markdown PRDs**: Exhaustive, implementation-ready documentation with zero ambiguity
-- **JSON Summaries**: Machine-readable structured data for automation and tooling
+- **Markdown PRDs**: Exhaustive, implementation-ready documentation with zero ambiguity (default output)
+- **JSON Summaries**: Machine-readable structured data for automation and tooling (use `format=json` parameter)
 - **Pseudocode**: Implementation-ready code examples for target platforms
 - **Test Plans**: Unit tests, integration tests, and edge case scenarios
 - **Gap Analysis**: Explicit documentation of unknowns, assumptions, and clarification needs
@@ -43,7 +43,7 @@ This agent serves as a senior systems analyst and product architect with deep ex
 genaiscript run bpel-transformer --vars input=order-process.bpel
 
 # Transform with WSDL context
-genaiscript run bpel-transformer --vars bpel=process.bpel wsdl=services.wsdl
+genaiscript run bpel-transformer --vars input=process.bpel wsdl=services.wsdl
 
 # Generate JSON summary
 genaiscript run bpel-transformer --vars input=process.bpel format=json > summary.json
