@@ -69,7 +69,6 @@ grep -i "gap\|assumption\|unclear" prds/*.md
 - `xsd/*.xsd` - XML schema definitions
 - `prds/*.md` - Generated Product Requirements Documents
 - `summaries/*.json` - Machine-readable JSON summaries
-- **Output:** Comprehensive PRD in markdown + JSON
 
 ## Core Principles
 
