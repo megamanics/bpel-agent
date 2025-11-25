@@ -1,0 +1,1 @@
+Specialized agents for transforming Oracle BPEL processes into modern implementations. Converts legacy SOA workflows into Spring Boot applications with complete PRD documentation and test coverage—enabling 100% feature parity in modern tech stacks.
