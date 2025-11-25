@@ -70,7 +70,7 @@ A specialized agent for analyzing Oracle BPEL processes and producing comprehens
 This agent serves as a senior systems analyst and product architect with deep expertise in:
 - Oracle BPEL 2.0 (OASIS WS-BPEL) XML processes
 - SOA architectures and integration patterns
-- Modern workflow orchestration systems (Python/Temporal, Node.js/Camunda, Go/Cadence)
+- Modern workflow orchestration systems (Python/Temporal, Node.js/Camunda, Java Spring Boot)
 - Business process modeling and transformation
 
 ### Key Capabilities
@@ -174,17 +174,17 @@ Structured output includes:
 
 The agent provides guidance for implementing BPEL processes in modern platforms:
 
-| BPEL Construct | Python/Temporal | Node.js/Camunda | Go/Cadence |
-|----------------|-----------------|-----------------|------------|
-| receive (createInstance) | Workflow start signal | Start event | Workflow entry |
-| invoke (sync) | Activity function | Service task | Activity call |
-| invoke (async) | Child workflow | Call activity | Child workflow |
-| assign | Local variables | Variables | Workflow state |
-| flow (parallel) | Parallel activities | Parallel gateway | Go routines (workflow.Go) |
-| while/repeatUntil | While loop | Loop task | For loop |
-| pick/onAlarm | Timer + signal | Event-based gateway | Selector with timer |
-| compensation | Saga pattern | Compensation event | Defer compensation |
-| correlation | Workflow ID + search attributes | Business key | Workflow ID + query |
+| BPEL Construct | Python/Temporal | Node.js/Camunda | Java Spring Boot |
+|----------------|-----------------|-----------------|------------------|
+| receive (createInstance) | Workflow start signal | Start event | @RestController endpoint |
+| invoke (sync) | Activity function | Service task | RestTemplate/WebClient call |
+| invoke (async) | Child workflow | Call activity | @Async method / CompletableFuture |
+| assign | Local variables | Variables | Local variables / DTOs |
+| flow (parallel) | Parallel activities | Parallel gateway | CompletableFuture.allOf() |
+| while/repeatUntil | While loop | Loop task | While/do-while loop |
+| pick/onAlarm | Timer + signal | Event-based gateway | @Scheduled / Timer task |
+| compensation | Saga pattern | Compensation event | @Transactional with rollback |
+| correlation | Workflow ID + search attributes | Business key | Correlation ID header |
 
 ### Boundaries and Limitations
 
@@ -492,7 +492,6 @@ output_formats:
 target_stacks:
   - python_temporal
   - nodejs_camunda
-  - go_cadence
   - java_springboot
 preserve_semantics: strict
 handle_ambiguity: explicit_gaps
